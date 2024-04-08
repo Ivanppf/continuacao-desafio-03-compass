@@ -22,6 +22,7 @@ public class Product {
     private UUID productId;
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
+    @Column(updatable = false, nullable = false)
     private LocalDate date;
     private String description;
     private String name;

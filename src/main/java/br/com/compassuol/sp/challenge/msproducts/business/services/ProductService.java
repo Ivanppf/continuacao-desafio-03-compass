@@ -29,8 +29,9 @@ public class ProductService {
     }
 
     public Product update(UUID id, Product product) {
-        findById(id);
+        Product foundProduct = findById(id);
         product.setProductId(id);
+        product.setDate(foundProduct.getDate());
         return productRepository.save(product);
     }
 
