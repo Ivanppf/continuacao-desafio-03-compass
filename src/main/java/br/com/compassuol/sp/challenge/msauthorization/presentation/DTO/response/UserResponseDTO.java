@@ -4,10 +4,9 @@ import br.com.compassuol.sp.challenge.msauthorization.model.entities.Role;
 import br.com.compassuol.sp.challenge.msauthorization.model.entities.User;
 
 import java.util.List;
-import java.util.UUID;
 
 public record UserResponseDTO(
-        UUID id,
+        Integer id,
         String firstName,
         String lastName,
         String email,

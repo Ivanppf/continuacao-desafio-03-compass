@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "tb_role")
 @Data
@@ -13,8 +11,8 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID roleId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer roleId;
     private String name;
 
     public Role(String name) {

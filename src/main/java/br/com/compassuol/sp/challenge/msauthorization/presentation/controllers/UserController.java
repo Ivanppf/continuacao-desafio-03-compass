@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
@@ -23,7 +21,7 @@ public class UserController {
     private ConverterService converterService;
 
     @GetMapping("{id}")
-    public ResponseEntity findById(@PathVariable UUID id) {
+    public ResponseEntity findById(@PathVariable Integer id) {
         try {
             User user = userService.findById(id);
             return ResponseEntity.ok(new UserResponseDTO(user));
@@ -45,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable UUID id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
         try {
             User user = converterService.DTOToUser(userRequestDTO);
             UserResponseDTO userResponseDTO = new UserResponseDTO(userService.save(user));

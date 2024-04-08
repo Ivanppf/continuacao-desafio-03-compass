@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.UUID;
-
 @Service
 @SessionScope
 @AllArgsConstructor
@@ -15,7 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User findById(UUID id) {
+    public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User with id " + id + " not found"));
     }
 
@@ -25,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(UUID id, User user) {
+    public User update(Integer id, User user) {
         user.setUserId(id);
         return userRepository.save(user);
     }
