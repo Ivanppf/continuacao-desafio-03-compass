@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "td_product")
+@Table(name = "tb_product")
 @Data
 @NoArgsConstructor
 public class Product {

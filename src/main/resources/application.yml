@@ -1,0 +1,19 @@
+spring:
+  h2:
+    console.enabled: true
+  datasource:
+    #    url: jdbc:postgresql://localhost:5432/challenge03_microservices
+    #    username: postgres
+    #    password: password
+    url: jdbc:h2:mem:challenge03_microservices
+    username: sa
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  application:
+    name: ms-products
+
+server:
+  port: 8081

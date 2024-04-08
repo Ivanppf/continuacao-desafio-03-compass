@@ -16,8 +16,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID categoryId;
     private String name;
-//    @ManyToMany(mappedBy = "categoriesList")
-//    private List<Product> productList;
 
     public Category(String name) {
         this.name = name;
