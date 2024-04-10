@@ -1,8 +1,8 @@
 package br.com.compassuol.sp.challenge.msproducts.business.configuration;
 
-import br.com.compassuol.sp.challenge.msproducts.business.services.ProductService;
 import br.com.compassuol.sp.challenge.msproducts.model.entities.Category;
 import br.com.compassuol.sp.challenge.msproducts.model.repository.CategoryRepository;
+import br.com.compassuol.sp.challenge.msproducts.model.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TestConfig implements CommandLineRunner {
     private CategoryRepository categoryRepository;
-    private ProductService productService;
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) throws Exception {

@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "tb_product")
@@ -18,8 +17,8 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID productId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer productId;
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     @Column(updatable = false, nullable = false)

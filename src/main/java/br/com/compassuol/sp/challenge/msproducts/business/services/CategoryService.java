@@ -6,15 +6,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.UUID;
-
 @Service
 @SessionScope
 @AllArgsConstructor
 public class CategoryService {
     private CategoryRepository categoryRepository;
 
-    public Category findById(UUID id) {
+    public Category findById(Integer id) {
         return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category with id " + id + "not found!"));
     }
 

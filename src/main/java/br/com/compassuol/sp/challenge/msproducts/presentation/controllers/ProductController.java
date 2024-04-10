@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @RestController
 @RequestMapping("/products")
 @AllArgsConstructor
@@ -21,7 +19,7 @@ public class ProductController {
     private ConverterService converterService;
 
     @GetMapping("{id}")
-    public ResponseEntity findById(@PathVariable UUID id) {
+    public ResponseEntity findById(@PathVariable Integer id) {
         try {
             ProductResponseDTO productResponseDTO = new ProductResponseDTO(productService.findById(id));
             return ResponseEntity.ok(productResponseDTO);
@@ -43,7 +41,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity update(@PathVariable UUID id, @Valid @RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody ProductRequestDTO productRequestDTO) {
         try {
             Product product = converterService.RequestDTOToProduct(productRequestDTO);
             ProductResponseDTO productResponseDTO = new ProductResponseDTO(productService.update(id, product));
@@ -54,7 +52,7 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delete(UUID id) {
+    public ResponseEntity delete(Integer id) {
         try {
             productService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

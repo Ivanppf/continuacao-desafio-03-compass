@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @SessionScope
@@ -16,7 +15,7 @@ import java.util.UUID;
 public class ProductService {
     private ProductRepository productRepository;
 
-    public Product findById(UUID id) {
+    public Product findById(Integer id) {
         return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with id " + id + " not found"));
     }
 
@@ -28,14 +27,14 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product update(UUID id, Product product) {
+    public Product update(Integer id, Product product) {
         Product foundProduct = findById(id);
         product.setProductId(id);
         product.setDate(foundProduct.getDate());
         return productRepository.save(product);
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Integer id) {
         productRepository.deleteById(id);
     }
 }
