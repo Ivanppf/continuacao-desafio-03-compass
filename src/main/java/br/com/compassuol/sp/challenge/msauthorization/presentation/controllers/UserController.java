@@ -10,12 +10,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.SessionScope;
 
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
-@SessionScope
+//@SessionScope
 public class UserController {
     private UserService userService;
     private ConverterService converterService;
@@ -46,6 +45,7 @@ public class UserController {
     public ResponseEntity update(@PathVariable Integer id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
         try {
             User user = converterService.DTOToUser(userRequestDTO);
+            user.setUserId(id);
             UserResponseDTO userResponseDTO = new UserResponseDTO(userService.save(user));
             return new ResponseEntity(userResponseDTO, HttpStatus.CREATED);
         } catch (Exception e) {
