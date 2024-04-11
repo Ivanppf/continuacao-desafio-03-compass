@@ -1,17 +1,39 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          client-server-oidc:
+            provider: spring
+            client-id: client-server
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/{registrationId}"
+            scope: openid, profile
+            client-name: client-server-oidc
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
   application:
     name: gateway
-
   cloud:
     gateway:
       mvc:
         routes:
-          - id: hello-world
-            uri: http://localhost:8081
+          - id: ms-products
+            uri: http://127.0.0.1:9090
             predicates:
-              - Path=/products/{id}
-#            filters:
-#              - SetPath=/get
+              - Path=/**
+            #              - Path=/products/{id}
+            filters:
+              - TokenRelay=
+      #          - id: authorization-server
+      #            uri: http://127.0.0.1:8082
+      #            predicates:
+      #              - Path=/products/{id}
+    #            filters:
+    #              - SetPath=/get
+
 
 server:
   port: 8080
