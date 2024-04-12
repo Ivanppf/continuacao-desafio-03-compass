@@ -7,9 +7,12 @@ import br.com.compassuol.sp.challenge.msproducts.presentation.DTO.request.Produc
 import br.com.compassuol.sp.challenge.msproducts.presentation.DTO.response.ProductResponseDTO;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -23,6 +26,16 @@ public class ProductController {
         try {
             ProductResponseDTO productResponseDTO = new ProductResponseDTO(productService.findById(id));
             return ResponseEntity.ok(productResponseDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity findAll(Pageable pageable) {
+        try {
+            List<Product> productPage = productService.findAll(pageable).getContent();
+            return ResponseEntity.ok(productPage.stream().map(ProductResponseDTO::new));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

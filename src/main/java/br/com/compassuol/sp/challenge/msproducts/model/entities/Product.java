@@ -27,7 +27,7 @@ public class Product {
     private String name;
     private String imgUrl;
     private BigDecimal price;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(
             name = "tb_product_category",
             joinColumns = @JoinColumn(name = "productId"),

@@ -1,40 +1,17 @@
 package br.com.compassuol.sp.challenge.msproducts.business.services;
 
 import br.com.compassuol.sp.challenge.msproducts.model.entities.Product;
-import br.com.compassuol.sp.challenge.msproducts.model.repository.ProductRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+public interface ProductService {
+    Product findById(Integer id);
 
-@Service
-@SessionScope
-@AllArgsConstructor
-public class ProductService {
-    private ProductRepository productRepository;
+    Page<Product> findAll(Pageable pageable);
 
-    public Product findById(Integer id) {
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product with id " + id + " not found"));
-    }
+    Product save(Product product);
 
-    public List<Product> findAll(Sort pageable) {
-        return productRepository.findAll(pageable);
-    }
+    Product update(Integer id, Product product);
 
-    public Product save(Product product) {
-        return productRepository.save(product);
-    }
-
-    public Product update(Integer id, Product product) {
-        Product foundProduct = findById(id);
-        product.setProductId(id);
-        product.setDate(foundProduct.getDate());
-        return productRepository.save(product);
-    }
-
-    public void deleteById(Integer id) {
-        productRepository.deleteById(id);
-    }
+    void deleteById(Integer id);
 }

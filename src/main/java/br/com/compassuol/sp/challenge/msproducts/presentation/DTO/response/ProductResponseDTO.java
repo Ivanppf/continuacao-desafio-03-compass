@@ -4,6 +4,7 @@ import br.com.compassuol.sp.challenge.msproducts.model.entities.Category;
 import br.com.compassuol.sp.challenge.msproducts.model.entities.Product;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public record ProductResponseDTO(
                 product.getDescription(),
                 product.getName(),
                 product.getImgUrl(),
-                product.getPrice(),
+                product.getPrice().setScale(2, RoundingMode.UNNECESSARY),
                 product.getCategoriesList()
         );
     }
