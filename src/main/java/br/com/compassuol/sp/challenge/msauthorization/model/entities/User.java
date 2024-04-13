@@ -47,14 +47,9 @@ public class User implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach((role) -> {
             switch (role.getName()) {
-                case "Operator" -> {
-                    authorities.add(new SimpleGrantedAuthority("ROLE_OPERATOR"));
-                }
-                case "Admin" -> {
-                    authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    authorities.add(new SimpleGrantedAuthority("ROLE_OPERATOR"));
-                }
-                default -> throw new RuntimeException("Role not found");
+                case "Operator" -> authorities.add(new SimpleGrantedAuthority("ROLE_OPERATOR"));
+                case "Admin" -> authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                default -> throw new RuntimeException("Role " + role.getName() + " not found");
             }
         });
         return authorities;
