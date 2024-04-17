@@ -1,7 +1,9 @@
 package br.com.compassuol.sp.challenge.msauthorization.business.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
@@ -13,13 +15,15 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import java.util.UUID;
 
 @Configuration
+@AllArgsConstructor
 public class ClientStoreConfig {
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     RegisteredClientRepository registeredClientRepository() {
         var registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("client-server")
-                .clientSecret("{noop}secret")
+                .clientSecret("$2a$10$PiyJdg0BhHRa/yzJsd3rNuyzR3nDsR2mMETHwWurbXDLYIlZPP29e")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
@@ -30,9 +34,8 @@ public class ClientStoreConfig {
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
                 .build();
 
+//        System.out.println(registeredClient.getClientSecret());
         return new InMemoryRegisteredClientRepository(registeredClient);
 
-
     }
-
 }

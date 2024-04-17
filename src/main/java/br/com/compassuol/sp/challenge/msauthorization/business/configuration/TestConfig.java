@@ -7,7 +7,6 @@ import br.com.compassuol.sp.challenge.msauthorization.model.repository.RoleRepos
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import java.util.List;
 public class TestConfig implements CommandLineRunner {
     private RoleRepository roleRepository;
     private UserService userService;
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -29,18 +27,18 @@ public class TestConfig implements CommandLineRunner {
         user1.setFirstName("pedro");
         user1.setLastName("lucas");
         user1.setEmail("pedro@gmail.com");
-        user1.setPassword(passwordEncoder.encode("pedro123"));
+        user1.setPassword("pedro123");
         Role role3 = roleRepository.findById(1).get();
         user1.setRoles(List.of(role3));
-        userService.save(user1);
+        User savedUser = userService.save(user1);
 
-        User user2 = new User();
-        user2.setFirstName("robson");
-        user2.setLastName("batista");
-        user2.setEmail("robson@gmail.com");
-        user2.setPassword(passwordEncoder.encode("robson123"));
-        Role role4 = roleRepository.findById(2).get();
-        user2.setRoles(List.of(role4));
-        userService.save(user2);
+//        User user2 = new User();
+//        user2.setFirstName("robson");
+//        user2.setLastName("batista");
+//        user2.setEmail("robson@gmail.com");
+//        user2.setPassword("robson123");
+//        Role role4 = roleRepository.findById(2).get();
+//        user2.setRoles(List.of(role4));
+//        userService.save(user2);
     }
 }
