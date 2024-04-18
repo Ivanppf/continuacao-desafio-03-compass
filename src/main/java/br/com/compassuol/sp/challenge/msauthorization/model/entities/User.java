@@ -42,6 +42,10 @@ public class User implements UserDetails {
         this.password = userRequestDTO.password();
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

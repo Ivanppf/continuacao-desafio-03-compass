@@ -32,13 +32,13 @@ public class TestConfig implements CommandLineRunner {
         user1.setRoles(List.of(role3));
         User savedUser = userService.save(user1);
 
-//        User user2 = new User();
-//        user2.setFirstName("robson");
-//        user2.setLastName("batista");
-//        user2.setEmail("robson@gmail.com");
-//        user2.setPassword("robson123");
-//        Role role4 = roleRepository.findById(2).get();
-//        user2.setRoles(List.of(role4));
-//        userService.save(user2);
+        User user2 = new User();
+        user2.setFirstName("robson");
+        user2.setLastName("batista");
+        user2.setEmail("robson@gmail.com");
+        user2.setPassword("robson123");
+        Role role4 = roleRepository.findById(2).get();
+        user2.setRoles(List.of(role4));
+        userService.save(user2);
     }
 }

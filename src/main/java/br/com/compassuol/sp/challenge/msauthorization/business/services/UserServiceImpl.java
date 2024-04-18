@@ -1,5 +1,6 @@
 package br.com.compassuol.sp.challenge.msauthorization.business.services;
 
+import br.com.compassuol.sp.challenge.EmailDTO;
 import br.com.compassuol.sp.challenge.msauthorization.model.entities.User;
 import br.com.compassuol.sp.challenge.msauthorization.model.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
-    //    private RabbitmqService rabbitmqService;
+    private RabbitmqService rabbitmqService;
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -22,7 +23,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        EmailDTO emailDTO = new EmailDTO("", "", "");
+        EmailDTO emailDTO = new EmailDTO(user.getEmail(), "ms notification API", "Olá " + user.getFullName());
+        rabbitmqService.enviarEmail("ms.email", emailDTO);
         return userRepository.save(user);
     }
 
