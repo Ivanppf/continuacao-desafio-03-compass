@@ -14,6 +14,11 @@ spring:
       ddl-auto: update
   application:
     name: ms-products
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:9000
 
 server:
-  port: 8081
+  port: 9090
